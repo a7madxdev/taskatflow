@@ -9,6 +9,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useAction } from "next-safe-action/hooks";
 import { createTaskAction } from "@/lib/actions/task.actions";
 import Tip from "@/components/Tip";
+import { toast } from "sonner";
 
 function AddTask() {
   const {
@@ -27,7 +28,10 @@ function AddTask() {
   const { execute, status } = useAction(createTaskAction, {
     onSuccess({ data }) {
       if (data.success) {
+        toast.success("Task created successfully");
         reset();
+      } else {
+        toast.error(data.message);
       }
     },
   });

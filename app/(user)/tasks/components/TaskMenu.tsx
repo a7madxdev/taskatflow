@@ -9,6 +9,8 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { AlertDialog } from "@/components/AlertDialog";
+import { useState } from "react";
 
 type TaskMenuProps = {
   onEdit: () => void;
@@ -16,34 +18,42 @@ type TaskMenuProps = {
 };
 
 export default function TaskMenu({ onEdit, onDelete }: TaskMenuProps) {
+  const [isDeleteAlertOpen, setIsDeleteAlertOpen] = useState(false);
   return (
-    <DropdownMenu>
-      <DropdownMenuTrigger asChild>
-        <button
-          type="button"
-          aria-label="Task options"
-          className="rounded-md p-2 duration-150 hover:bg-slate-200"
-        >
-          <MoreHorizontal size={20} />
-        </button>
-      </DropdownMenuTrigger>
+    <>
+      <DropdownMenu>
+        <DropdownMenuTrigger asChild>
+          <button
+            type="button"
+            aria-label="Task options"
+            className="rounded-md p-2 duration-150 hover:bg-slate-200"
+          >
+            <MoreHorizontal size={20} />
+          </button>
+        </DropdownMenuTrigger>
 
-      <DropdownMenuContent align="end">
-        <DropdownMenuItem onSelect={onEdit}>
-          <Pencil />
-          Edit
-        </DropdownMenuItem>
+        <DropdownMenuContent align="end">
+          <DropdownMenuItem onSelect={onEdit}>
+            <Pencil />
+            Edit
+          </DropdownMenuItem>
 
-        <DropdownMenuSeparator />
+          <DropdownMenuSeparator />
 
-        <DropdownMenuItem
-          onSelect={onDelete}
-          className="text-destructive focus:text-destructive"
-        >
-          <Trash2 />
-          Delete
-        </DropdownMenuItem>
-      </DropdownMenuContent>
-    </DropdownMenu>
+          <DropdownMenuItem
+            className="text-destructive focus:text-destructive"
+            onSelect={() => setIsDeleteAlertOpen(true)}
+          >
+            <Trash2 />
+            Delete
+          </DropdownMenuItem>
+        </DropdownMenuContent>
+      </DropdownMenu>
+      <AlertDialog
+        onConfirm={onDelete}
+        open={isDeleteAlertOpen}
+        setOpen={setIsDeleteAlertOpen}
+      />
+    </>
   );
 }

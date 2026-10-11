@@ -5,8 +5,9 @@ import Providers from "@/components/Providers";
 import { ReactNode } from "react";
 import { Geist } from "next/font/google";
 import { cn } from "@/lib/utils";
+import { Toaster } from "@/components/ui/sonner";
 
-const geist = Geist({subsets:['latin'],variable:'--font-sans'});
+const geist = Geist({ subsets: ["latin"], variable: "--font-sans" });
 
 const robotoSlab = localFont({
   src: [
@@ -25,9 +26,18 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
-    <html lang="en" className={cn("antialiased", robotoSlab.variable, "font-sans", geist.variable)}>
+    <html
+      lang="en"
+      className={cn(
+        "antialiased",
+        robotoSlab.variable,
+        "font-sans",
+        geist.variable,
+      )}
+    >
       <body className="min-h-full font-robotoSlab text-slate-900">
         <Providers>{children}</Providers>
+        <Toaster position="bottom-right" richColors />
       </body>
     </html>
   );

@@ -99,7 +99,7 @@ model Team {
   description String?
 
   memberships Membership[]
-  team        Task[]       @relation("TeamTasks")
+  tasks       Task[]       @relation("TeamTasks")
   assignments Assignment[]
 }
 
@@ -127,5 +127,6 @@ model Assignment {
   membershipId String     @db.ObjectId
   membership   Membership @relation(fields: [membershipId], references: [id], onDelete: Cascade)
 
-  isDone Boolean @default(false)
+  isDone    Boolean  @default(false)
+  createdAt DateTime @default(now())
 }
