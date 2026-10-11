@@ -73,8 +73,7 @@ export const foramtDate = (
 
       if (diffInHours === 1) return "An hour ago";
       if (diffInHours === 2) return "Couple hours ago";
-      if (diffInHours >= 3 && diffInHours <= 10)
-        return `${diffInHours} hours ago`;
+      if (diffInHours >= 3) return `${diffInHours} hours ago`;
     }
 
     // Deal with days
@@ -89,7 +88,7 @@ export const foramtDate = (
     if (diffInMonths >= 3 && diffInMonths <= 12)
       return `${diffInMonths} monthes ago`;
 
-    return date.toLocaleDateString("ar-EG");
+    return date.toLocaleDateString("en-EG");
   }
 
   return "";
